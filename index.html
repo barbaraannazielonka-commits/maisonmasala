@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Masala – Restaurant English</title>
+<style>
+:root{--wine:#7a1f2b;--accent:#f2a900;--bg1:#fff3dc;--bg2:#fff8ec;--ink:#2b2118;--muted:#5f4e3b;--card:#ffffff;--line:#d9c3a0;--soft:#fff3dc;--chip:#f6e8cd;--good:#2e7d4f;--good-bg:#eaf6ee;--mid-bg:#fff6df;--bad:#b3261e;--bad-bg:#fdecea;--fb-bg:#fffaf0;--sel:#eaf2fd;--focus:#1b6ac9;--hdr:#7a1f2b;--hdr-ink:#ffffff;--btn:#7a1f2b;--btn-ink:#ffffff;--tagv:#dff1e4;--tagal:#fde1dd}
+body.hc{--wine:#3d000a;--accent:#ffdd00;--bg1:#ffffff;--bg2:#ffffff;--ink:#000000;--muted:#000000;--card:#ffffff;--line:#000000;--soft:#ffffff;--chip:#e9e9e9;--good:#004d1a;--good-bg:#dcffe6;--mid-bg:#fff2b8;--bad:#8a0000;--bad-bg:#ffdcdc;--fb-bg:#ffffff;--sel:#cfe2ff;--focus:#0033cc;--hdr:#000000;--hdr-ink:#ffffff;--btn:#000000;--btn-ink:#ffffff;--tagv:#dcffe6;--tagal:#ffdcdc}
+body.dark{--wine:#ffd24d;--accent:#ffd24d;--bg1:#14110f;--bg2:#14110f;--ink:#f4efe6;--muted:#d8cfbf;--card:#221d19;--line:#7a6d5c;--soft:#2e2721;--chip:#3a322b;--good:#6fdc98;--good-bg:#173323;--mid-bg:#3a3110;--bad:#ff8a80;--bad-bg:#3d1a17;--fb-bg:#2a231e;--sel:#1b2c44;--focus:#8cc2ff;--hdr:#000000;--hdr-ink:#ffd24d;--btn:#ffd24d;--btn-ink:#14110f;--tagv:#173323;--tagal:#3d1a17}
+*{box-sizing:border-box}
+html{font-size:20px}
+body{margin:0;font-family:var(--font,"Segoe UI",system-ui,-apple-system,Arial,sans-serif);background:linear-gradient(180deg,var(--bg1) 0,var(--bg2) 14rem);color:var(--ink);font-size:1.1rem;line-height:1.55}
+body.space{letter-spacing:.05em;word-spacing:.16em;line-height:1.95}
+h1,h2,h3,.rank{font-family:var(--hfont,Georgia,serif)}
+header{background:var(--hdr);color:var(--hdr-ink);padding:.75rem 1.1rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;border-bottom:.3rem solid var(--accent)}
+header h1{margin:0;font-size:1.35rem}
+header h1 small{display:block;font-size:.8rem;font-family:inherit;opacity:.92;font-weight:400}
+.tools{display:flex;gap:.5rem;flex-wrap:wrap}
+.tools button{background:rgba(255,255,255,.14);color:var(--hdr-ink);border:2px solid rgba(255,255,255,.55);border-radius:999px;padding:.4rem 1rem;font:inherit;font-size:.9rem;cursor:pointer}
+.tools button[aria-pressed=true]{background:var(--accent);color:#2b1a00;border-color:var(--accent)}
+.tools #bA11y{background:var(--accent);color:#2b1a00;border-color:var(--accent);font-weight:700}
+main{max-width:56rem;margin:0 auto;padding:1.1rem}
+.progress{height:.65rem;background:var(--chip);border-radius:99px;overflow:hidden;margin:.15rem 0 .4rem}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--wine));width:0;transition:width .4s}
+.meta{display:flex;justify-content:space-between;gap:1rem;font-size:.85rem;color:var(--muted);margin-bottom:.75rem}
+.card{background:var(--card);border:2px solid var(--line);border-radius:1.1rem;padding:1.4rem;box-shadow:0 .4rem 1.1rem rgba(0,0,0,.07)}
+.mission{font-size:.8rem;text-transform:uppercase;letter-spacing:.09em;color:var(--wine);font-weight:700;margin-bottom:.6rem}
+h2{margin:.2em 0 .4em;color:var(--wine)}
+.bubble{display:flex;gap:.9rem;align-items:flex-start;background:var(--soft);border-radius:1rem;padding:.9rem 1rem;margin-bottom:.9rem}
+.av{font-size:2.2rem;line-height:1}
+.who{font-weight:700;font-size:.85rem;color:var(--wine)}
+.say{margin:.2em 0;font-size:1.15rem}
+.no{display:none;margin:.3em 0 0;color:var(--muted);font-size:.95rem;border-top:1px dashed var(--line);padding-top:.4rem}
+body.hint .no{display:block}
+.prompt{font-weight:700;margin:.4rem 0 .6rem}
+.opts{display:grid;gap:.65rem}
+.optrow{display:flex;gap:.5rem;align-items:stretch}.optrow .opt{flex:1}
+.opt{display:flex;gap:.75rem;text-align:left;align-items:flex-start;width:100%;background:var(--card);border:2px solid var(--line);border-radius:.9rem;padding:.75rem .9rem;font:inherit;cursor:pointer;color:inherit;transition:transform .08s,border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px)}
+.opt:focus-visible,.btn:focus-visible,.pair:focus-visible,.mbtn:focus-visible,.tg:focus-visible,.tools button:focus-visible,.link:focus-visible,.spk:focus-visible{outline:.19rem solid var(--focus);outline-offset:.15rem}
+.opt .l{flex:none;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--chip);font-weight:700;display:grid;place-items:center;font-size:.85rem}
+.opt:disabled{cursor:default;color:inherit;opacity:1}
+.opt.sel.good{border-color:var(--good);background:var(--good-bg)}
+.opt.sel.mid{border-color:var(--accent);background:var(--mid-bg)}
+.opt.sel.bad{border-color:var(--bad);background:var(--bad-bg)}
+.opt.best:not(.sel){border-color:var(--good);border-style:dashed}
+.fb{margin-top:.9rem;display:none;border-left:.4rem solid var(--accent);background:var(--fb-bg);border-radius:.6rem;padding:.75rem .9rem}
+.fb.show{display:block}.fb.good{border-color:var(--good)}.fb.bad{border-color:var(--bad)}
+.pts{font-weight:800}
+.say-aloud{margin-top:.5rem;font-size:.92rem;color:var(--muted)}
+.nav{margin-top:1rem;display:flex;justify-content:flex-end;gap:.6rem;flex-wrap:wrap}
+.btn{background:var(--btn);color:var(--btn-ink);border:2px solid var(--btn);border-radius:999px;padding:.65rem 1.5rem;font:inherit;font-weight:700;cursor:pointer}
+.btn.alt{background:var(--card);color:var(--wine);border:2px solid var(--wine)}
+.btn:disabled{opacity:.4;cursor:default}
+.hero{text-align:center}.hero .big{font-size:3.4rem}
+.hero input{font:inherit;padding:.6rem .9rem;border-radius:.75rem;border:2px solid var(--line);width:min(20rem,100%);margin:.5rem 0 .9rem;background:var(--card);color:var(--ink)}
+.flags{font-size:1.6rem;letter-spacing:.2em}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1rem}
+body.narrow .match{grid-template-columns:1fr}
+.pair{background:var(--card);border:2px solid var(--line);border-radius:.75rem;padding:.6rem .75rem;font:inherit;text-align:left;cursor:pointer;color:inherit}
+.pair.on{border-color:var(--focus);background:var(--sel)}
+.pair.done{border-color:var(--good);background:var(--good-bg);cursor:default}
+.pair.shake{animation:sh .3s;border-color:var(--bad)}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.scorebar{display:flex;align-items:center;gap:.6rem;margin:.4rem 0}
+.scorebar .name{width:12rem;font-size:.9rem}
+body.narrow .scorebar .name{width:7rem}
+.scorebar .bar{flex:1;height:.8rem;background:var(--chip);border-radius:99px;overflow:hidden}
+.scorebar .bar i{display:block;height:100%;background:var(--good)}
+.rank{font-size:1.7rem;color:var(--wine)}
+.safe{border-radius:.75rem;padding:.75rem .9rem;margin:.9rem 0;background:var(--good-bg);border-left:.4rem solid var(--good)}
+.safe.warn{background:var(--bad-bg);border-color:var(--bad)}
+.phr h3{margin:.9em 0 .2em;font-size:1.05rem;color:var(--wine)}.phr li{margin:.3em 0}
+dialog{border:0;border-radius:1.1rem;max-width:48rem;width:calc(100% - 1.5rem);padding:0;background:var(--card);color:var(--ink);box-shadow:0 1.2rem 3.5rem rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(40,20,10,.55)}
+.dh{display:flex;justify-content:space-between;align-items:center;background:var(--hdr);color:var(--hdr-ink);padding:.7rem 1.1rem}
+.dh h2{color:var(--hdr-ink);margin:0;font-size:1.3rem}
+.dh button{background:transparent;border:0;color:var(--hdr-ink);font-size:1.8rem;cursor:pointer}
+.db{padding:.9rem 1.1rem;max-height:75vh;overflow:auto}
+.db h3{margin:1rem 0 .4rem;color:var(--wine);font-size:1.05rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:.45rem .4rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--wine)}
+.tag{display:inline-block;background:var(--chip);border-radius:99px;padding:.05rem .6rem;margin:.05rem .15rem .05rem 0;font-size:.8rem}
+.tag.v{background:var(--tagv)}.tag.al{background:var(--tagal)}
+.sub{color:var(--muted);font-size:.95rem}
+.site-footer{text-align:center;padding:1.4rem 1rem 1.9rem;color:var(--muted);font-size:.95rem;border-top:2px solid var(--line);max-width:56rem;margin:.6rem auto 0}
+.mlist{display:grid;gap:.65rem;margin:.9rem 0;text-align:left}
+.mbtn{display:flex;gap:.8rem;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:.9rem;padding:.65rem .9rem;font:inherit;cursor:pointer;color:inherit;width:100%;text-align:left}
+.mbtn:hover{border-color:var(--accent)}.mbtn b{display:block}.mbtn .e{font-size:1.8rem}
+.mbtn .st{display:block;font-weight:700;color:var(--ink)}
+.mbtn .go{flex:none;background:var(--btn);color:var(--btn-ink);border-radius:999px;padding:.35rem 1rem;font-weight:700;font-size:.9rem}
+.topnav{margin-bottom:.5rem}
+.link{background:none;border:0;color:var(--wine);font:inherit;font-size:.95rem;cursor:pointer;text-decoration:underline;padding:.25rem 0}
+.spk{flex:none;background:var(--card);color:inherit;border:2px solid var(--line);border-radius:50%;width:2.7rem;height:2.7rem;font-size:1.1rem;cursor:pointer;align-self:center;line-height:1}
+.spk:hover{border-color:var(--accent)}
+.spk.sm{width:1.9rem;height:1.9rem;font-size:.9rem;vertical-align:middle;margin-left:.25rem}
+.row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.group{display:flex;flex-wrap:wrap;gap:.5rem}
+.tg{background:var(--card);color:inherit;border:2px solid var(--line);border-radius:.75rem;padding:.5rem .9rem;font:inherit;cursor:pointer}
+.tg[aria-pressed=true]{border-color:var(--wine);background:var(--sel);font-weight:700;box-shadow:inset 0 0 0 1px var(--wine)}
+.tg:disabled{opacity:.4;cursor:default}
+.sizebtn{font-size:1.3rem;font-weight:700;min-width:3.4rem}
+output{font-weight:800;min-width:4.5rem;text-align:center;font-size:1.25rem}
+@media print{header,.nav,.noprint,.spk{display:none!important}body{background:#fff}.card{box-shadow:none;border:0}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Maison Masala<small>Restaurant English · French &amp; Indian cuisine</small></h1>
+  <div class="tools">
+    <button id="bMiss" type="button">🗺️ Missions</button>
+    <button id="bMenu" type="button">📖 Menu card</button>
+    <button id="bHint" type="button" aria-pressed="false">🇳🇴 Norsk hjelp</button>
+    <button id="bA11y" type="button" aria-haspopup="dialog">Aa Accessibility</button>
+  </div>
+</header>
+<dialog id="dlgA" aria-label="Accessibility settings"><div class="dh"><h2>Aa Accessibility</h2><button type="button" id="dax" aria-label="Close">×</button></div><div class="db">
+<h3>Text and page size</h3>
+<div class="row"><button type="button" class="tg sizebtn" id="sMinus" aria-label="Make everything smaller">A−</button><output id="sVal" aria-live="polite">125%</output><button type="button" class="tg sizebtn" id="sPlus" aria-label="Make everything bigger">A+</button></div>
+<p class="sub">Everything on the page gets bigger or smaller together. You can also zoom with Ctrl and + or − in your browser.</p>
+<h3>Font</h3><div class="group" id="fonts"></div><p class="sub" id="fnote"></p>
+<h3>Reading comfort</h3><div class="group"><button type="button" class="tg" id="bSpace" aria-pressed="false">Extra letter, word and line spacing</button></div>
+<h3>Colours</h3><div class="group" id="themes"></div>
+<h3 id="hSound">Sound</h3><div class="group" id="gSound"><button type="button" class="tg" id="bAuto" aria-pressed="false" title="Read every new sentence aloud">🔊 Auto-read</button><button type="button" class="tg" id="bSlow" aria-pressed="false" title="Slower voice">🐢 Slow voice</button></div>
+<div class="nav" style="justify-content:space-between"><button type="button" class="btn alt" id="aReset">Reset to standard</button><button type="button" class="btn" id="aDone">Done</button></div>
+</div></dialog>
+<main id="view"></main>
+<footer class="site-footer">Nannestad High School - Barbara Anna Zielonka</footer>
+<dialog id="dlg"><div class="dh"><h2>Our menu card</h2><button type="button" id="dx" aria-label="Close">×</button></div><div class="db" id="dbody"></div></dialog>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var view=$("#view");
+
+/* ---------- MENU (fictional allergen information, used in the game) ---------- */
+var MENU=[
+ {n:"Soupe à l'oignon",c:"🇫🇷",cat:"Starter",d:"onion soup with melted cheese on toasted bread",x:["milk","gluten","beef stock"]},
+ {n:"Samosas",c:"🇮🇳",cat:"Starter",d:"crispy pastry filled with spiced potatoes and peas",x:["gluten"],v:1},
+ {n:"Coq au vin",c:"🇫🇷",cat:"Main",d:"chicken cooked slowly in red wine with bacon, mushrooms and onions",x:["pork (bacon)","alcohol"]},
+ {n:"Ratatouille",c:"🇫🇷",cat:"Main",d:"vegetable stew with aubergine, courgette, peppers and tomato",x:[],v:1},
+ {n:"Croque monsieur",c:"🇫🇷",cat:"Main",d:"toasted sandwich with ham, cheese and white sauce",x:["pork (ham)","gluten","milk"]},
+ {n:"Butter chicken",c:"🇮🇳",cat:"Main",d:"chicken in a creamy, mild tomato sauce",x:["milk"]},
+ {n:"Chicken korma",c:"🇮🇳",cat:"Main",d:"chicken in a rich, sweet sauce made with cream and ground cashew nuts",x:["nuts (cashew)","milk"]},
+ {n:"Palak paneer",c:"🇮🇳",cat:"Main",d:"soft Indian cheese in a spinach sauce",x:["milk"],v:1},
+ {n:"Chicken biryani",c:"🇮🇳",cat:"Main",d:"basmati rice cooked with spiced chicken",x:["milk (yoghurt)"]},
+ {n:"Dal tadka",c:"🇮🇳",cat:"Main",d:"yellow lentils with garlic, cumin and tomato",x:[],v:1},
+ {n:"Naan",c:"🇮🇳",cat:"Side",d:"soft flatbread, baked in a hot oven",x:["gluten","milk","egg"],v:1},
+ {n:"Basmati rice",c:"🇮🇳",cat:"Side",d:"steamed white rice",x:[],v:1},
+ {n:"Crème brûlée",c:"🇫🇷",cat:"Dessert",d:"cold vanilla cream with a hard, burnt-sugar top",x:["milk","egg"],v:1},
+ {n:"Gulab jamun",c:"🇮🇳",cat:"Dessert",d:"warm milk dumplings in sweet syrup",x:["milk","gluten"],v:1},
+ {n:"Mango lassi",c:"🇮🇳",cat:"Drink",d:"sweet yoghurt drink with mango",x:["milk"],v:1}
+];
+function menu(n){return MENU.filter(function(m){return m.n===n})[0]}
+
+/* ---------- MISSIONS ---------- */
+// choice options: [text, points(0-3), feedback, risky?]
+var MISSIONS=[
+{title:"Mission 1 · Front of house",emoji:"🛎️",intro:"You are the waiter. Welcome the guests, make them feel at home and help them choose a dish.",scenes:[
+ {who:"Guest",e:"🧑",say:"Good evening. Do you have a table for two? We don't have a reservation.",no:"God kveld. Har dere et bord for to? Vi har ikke bestilt bord.",o:[
+  ["Good evening, and welcome to Maison Masala! Yes, we have a table by the window. Please follow me.",3,"Warm, polite and helpful. You greet, answer the question and guide the guests."],
+  ["Good evening. Yes, a table for two. This way.",2,"Correct, but a little cold. Add “welcome” and a friendly offer."],
+  ["No reservation? Let me check if we have space.",1,"Checking is fine, but it sounds unfriendly. Start with a greeting and a smile."],
+  ["You must book a table first. Come back tomorrow.",0,"Too direct and rude. A guest should feel welcome."]]},
+ {who:"Guest",e:"🧑",say:"This is our first time here. What do you recommend?",no:"Dette er første gang vi er her. Hva anbefaler du?",o:[
+  ["Our butter chicken is very popular. It is creamy and mild. If you prefer French food, I recommend the coq au vin. It is chicken cooked slowly in red wine.",3,"Excellent. You give a reason, describe the dishes and offer a choice."],
+  ["Try the butter chicken.",1,"Too short. Say why, and describe the dish."],
+  ["Everything is good. Take what you like.",1,"Not helpful. A good waiter makes a clear recommendation."],
+  ["The most expensive dish is the best.",0,"Pushy, and not true. Recommend dishes the guest will enjoy."]]},
+ {who:"Guest",e:"🧑",say:"Is the butter chicken very spicy?",no:"Er butter chicken veldig sterk?",o:[
+  ["It is mild and creamy, not very spicy. If you like, I can ask the chef to make it a bit spicier.",3,"Clear answer and a helpful offer."],
+  ["It's mild. Would you like it spicy?",2,"Good, but add a little more information about the sauce."],
+  ["No.",1,"Too short. Give more information."],
+  ["Yes, very spicy. You won't like it.",0,"This is wrong, and you cannot decide what the guest likes."]]}
+]},
+{title:"Mission 2 · Know your menu",emoji:"📖",intro:"A good waiter knows every dish. Match the dishes to their descriptions. Use the Menu card at the top if you need help.",scenes:[
+ {match:["Coq au vin","Ratatouille","Crème brûlée","Soupe à l'oignon","Butter chicken","Palak paneer","Chicken biryani","Mango lassi"]}
+]},
+{title:"Mission 3 · Allergies and special diets",emoji:"⚠️",intro:"Safety first. Guests trust you with their health. Use the Menu card to check what is in each dish. If you don't know, say so and ask.",scenes:[
+ {who:"Guest",e:"🧑",say:"I'm allergic to nuts. Is the chicken korma safe for me?",no:"Jeg har nøtteallergi. Er chicken korma trygg for meg?",o:[
+  ["I'm sorry, the chicken korma contains cashew nuts, so it isn't safe for you. I can recommend the palak paneer or the coq au vin instead. I will also tell the chef about your allergy.",3,"Perfect. You say the ingredient, give alternatives and inform the kitchen."],
+  ["Let me ask the chef.",2,"Safe, but the menu card already tells you: it contains cashew nuts. Tell the guest and offer alternatives."],
+  ["I think it's fine, but I'm not sure.",1,"Dangerous. Never guess about allergies.",true],
+  ["Yes, it's fine. Everybody likes it.",0,"Very dangerous! The korma contains cashew nuts.",true]]},
+ {who:"Guest",e:"🧑",say:"I'm vegetarian. What can I eat?",no:"Jeg er vegetarianer. Hva kan jeg spise?",o:[
+  ["We have several vegetarian dishes: palak paneer, ratatouille and dal tadka. Please note that the onion soup is made with beef stock, so it is not vegetarian.",3,"Great. You name dishes and warn about a hidden ingredient."],
+  ["Anything without meat. Just ask the chef.",1,"Not helpful. You should know the vegetarian dishes."],
+  ["Only salad.",1,"We don't have a salad on the menu, and there are many vegetarian options."],
+  ["The onion soup is vegetarian, and so is the ratatouille.",0,"The onion soup is made with beef stock, so it is not vegetarian.",true]]},
+ {who:"Guest",e:"🧑",say:"I don't eat pork. Do the croque monsieur or the coq au vin have pork in them?",no:"Jeg spiser ikke svinekjøtt. Inneholder croque monsieur eller coq au vin svinekjøtt?",o:[
+  ["Yes, both contain pork: ham in the croque monsieur and bacon in the coq au vin. The butter chicken and the biryani have no pork.",3,"Clear and complete, with alternatives."],
+  ["Yes, I think so. I will ask the chef.",2,"Good that you offer to check, but the menu card gives the answer."],
+  ["No, only chicken.",1,"Wrong. The coq au vin has bacon.",true],
+  ["No, there is no pork in any of our dishes.",0,"Wrong. There is ham in the croque monsieur and bacon in the coq au vin.",true]]},
+ {who:"Guest",e:"🧑",say:"I can't eat gluten. Can I have naan with my dish?",no:"Jeg tåler ikke gluten. Kan jeg få naan til retten min?",o:[
+  ["I'm sorry, naan is made with wheat flour, so it contains gluten. You can have basmati rice instead. It is gluten-free.",3,"Honest and helpful. You explain why and offer an alternative."],
+  ["Let me check with the chef.",2,"Safe, but the menu card shows that naan contains gluten."],
+  ["Maybe. Try a small piece.",0,"Dangerous advice. Never suggest that a guest tries something.",true],
+  ["Yes, of course.",0,"Naan contains gluten.",true]]},
+ {who:"Guest",e:"🧑",say:"Is your chicken halal?",no:"Er kyllingen deres halal?",o:[
+  ["I'm not sure. I will ask the manager and come back to you in a minute.",3,"Honest. It is better to say “I don't know” and find out than to guess."],
+  ["I'm not sure. Maybe you can ask someone else.",1,"You should help the guest find the answer yourself."],
+  ["Yes, of course.",0,"You don't know this, so you can't promise it. Never make up information.",true],
+  ["What is halal?",0,"Learn the basic words of your workplace. Halal means food that is allowed in Islam."]]}
+]},
+{title:"Mission 4 · Taking the order and solving problems",emoji:"🍽️",intro:"Take the order correctly, handle complaints calmly and keep the guests happy.",scenes:[
+ {who:"Guest",e:"🧑",say:"Okay, I'd like the butter chicken, mild, with naan and a mango lassi. And my wife will have the coq au vin and a glass of water.",no:"Greit, jeg tar butter chicken, mild, med naan og en mango lassi. Og kona mi tar coq au vin og et glass vann.",q:"How do you check the order?",o:[
+  ["So that's one butter chicken, mild, with naan and a mango lassi, and one coq au vin with a glass of water. Is that correct?",3,"Excellent. You repeat every detail and check."],
+  ["One butter chicken, one coq au vin, naan and drinks. Anything else?",2,"Good, but repeat the details (mild, mango lassi, water) to avoid mistakes."],
+  ["OK.",1,"Too short. How do you remember everything?"],
+  ["Butter chicken, spicy, and two coq au vin.",0,"Several mistakes. Listen carefully and repeat the order."]]},
+ {who:"Guest",e:"🧑",say:"Excuse me, my soup is cold.",no:"Unnskyld, suppen min er kald.",q:"How do you handle the complaint?",o:[
+  ["I'm so sorry about that. I'll take it back to the kitchen and bring you a hot one right away.",3,"Apologise, take action and give a time."],
+  ["I'm sorry. Do you want another soup?",2,"Polite, but say what you will do."],
+  ["The kitchen is very busy tonight.",1,"An excuse is not a solution."],
+  ["It was hot when it left the kitchen.",0,"Never blame the guest. Apologise and solve the problem."]]},
+ {who:"Guest",e:"🧑",say:"That was delicious, thank you!",no:"Dette var nydelig, tusen takk!",q:"What do you say?",o:[
+  ["Thank you, I'm glad you enjoyed it! Would you like coffee or dessert? We have crème brûlée and gulab jamun.",3,"Friendly, and you suggest something extra."],
+  ["Thank you. Would you like anything else?",2,"Polite. Name some options to make it easier."],
+  ["OK.",1,"Too short and not friendly."],
+  ["It's my job.",0,"Sounds unfriendly. Accept the compliment with a smile."]]}
+]},
+{title:"Mission 5 · In the kitchen",emoji:"👨‍🍳",intro:"Now you are the cook. Kitchens are fast and loud, so clear communication is also about safety.",scenes:[
+ {who:"Chef",e:"👨‍🍳",say:"Order for table 4! Two onion soups, one without croutons. The guest has a gluten allergy. Clean board and clean knife, please!",no:"Bestilling til bord 4! To løksupper, en uten krutonger. Gjesten har glutenallergi. Rent brett og ren kniv, takk!",q:"How do you answer the chef?",o:[
+  ["Yes, chef! Table 4: two onion soups, one without croutons because of a gluten allergy. I will use a clean board and a clean knife.",3,"Excellent. You repeat the order and the safety action."],
+  ["Yes, chef. Two onion soups, one without croutons.",2,"Good, but also confirm the allergy and the clean equipment."],
+  ["OK.",1,"Too short in a noisy kitchen. Repeat the order."],
+  ["Croutons are tiny. It won't matter.",0,"Never ignore an allergy. Even small amounts can be dangerous.",true]]},
+ {who:"Situation",e:"🔥",say:"You are carrying a hot pan behind a colleague, and there is not much space.",no:"Du bærer en varm panne bak en kollega, og det er lite plass.",q:"What do you say?",o:[
+  ["Behind! Hot pan!",3,"Short, clear and loud. This is the standard warning in a professional kitchen."],
+  ["Excuse me.",2,"Polite, but it doesn't warn about the danger."],
+  ["Move!",1,"Clear, but rude, and it doesn't say what is dangerous."],
+  ["(Say nothing and walk past.)",0,"Dangerous. Your colleague can't see or hear you.",true]]},
+ {who:"Chef",e:"👨‍🍳",say:"Do the mise en place for the lunch rush, and make sure the walk-in is sorted before the delivery arrives!",no:"Gjør mise en place klar til lunsjrushet, og sørg for at kjølerommet er ryddet før leveransen kommer!",q:"You don't understand everything the chef said. What do you say?",o:[
+  ["Sorry, chef, could you repeat that, please? I want to be sure I do it correctly.",3,"Asking is professional. It prevents mistakes."],
+  ["Sorry, what? I didn't understand.",2,"Okay, but be more polite and say what you want to do."],
+  ["(Nod and guess what to do.)",0,"Guessing in a kitchen leads to mistakes. Always ask."],
+  ["Yes, chef.",1,"Never say yes if you don't understand."]]}
+]}
+];
+
+/* ---------- sound (the browser's built-in text-to-speech) ---------- */
+var synth=window.speechSynthesis,auto=false,slow=false,voices=[];
+function ea(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function loadVoices(){try{if(synth)voices=synth.getVoices()||[]}catch(e){}}
+if(synth){loadVoices();if(synth.addEventListener)synth.addEventListener("voiceschanged",loadVoices);else synth.onvoiceschanged=loadVoices}
+function voiceFor(lang){
+  var pre=lang.slice(0,2).toLowerCase();
+  var c=voices.filter(function(v){return v.lang&&v.lang.toLowerCase().indexOf(pre)===0});
+  if(!c.length)return null;
+  var exact=c.filter(function(v){return v.lang.replace("_","-").toLowerCase()===lang.toLowerCase()});
+  var pool=exact.length?exact:c;
+  var good=pool.filter(function(v){return /natural|online|google|premium|enhanced/i.test(v.name)});
+  return good[0]||pool[0];
+}
+function speak(text,lang){
+  if(!synth||!text)return;lang=lang||"en-GB";
+  try{
+    synth.cancel();
+    var u=new SpeechSynthesisUtterance(String(text));u.lang=lang;
+    var v=voiceFor(lang);if(!v&&lang.indexOf("en")===0)v=voiceFor("en-GB");
+    if(v)u.voice=v;u.rate=slow?0.7:0.92;synth.speak(u);
+  }catch(e){}
+}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-say]");if(b)speak(b.dataset.say,b.dataset.lang)});
+
+/* ---------- state ---------- */
+var st,M;
+function blank(){return{p:0,max:0,idx:0,started:false,risky:[]}}
+function fresh(name){st={name:name||""};M=MISSIONS.map(blank)}
+fresh();
+var QT=MISSIONS.reduce(function(a,m){return a+m.scenes.length},0);
+
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function totals(){var p=0,max=0;M.forEach(function(x){p+=x.p;max+=x.max});return{p:p,max:max}}
+function qDone(){return M.reduce(function(a,x){return a+x.idx},0)}
+function isDone(mi){return M[mi].idx>=MISSIONS[mi].scenes.length}
+function go(){window.scrollTo(0,0);try{if(synth)synth.cancel()}catch(e){}}
+function topnav(){return'<div class="topnav noprint"><button class="link" id="back" type="button">‹ All missions</button></div>'}
+function wireBack(){var b=$("#back");if(b)b.onclick=showHub}
+function bar(mi){
+  var n=MISSIONS[mi].scenes.length,k=M[mi].idx;
+  return'<div class="progress" aria-hidden="true"><i style="width:'+Math.round(100*k/n)+'%"></i></div><div class="meta"><span>Mission '+(mi+1)+' · Question '+Math.min(k+1,n)+' of '+n+'</span><span>⭐ '+totals().p+' points</span></div>';
+}
+
+/* ---------- start + hub ---------- */
+function showStart(){
+  go();
+  view.innerHTML='<section class="card hero"><div class="big">🍛🥐</div><h2>Welcome to Maison Masala</h2>'+
+   '<p class="flags">🇫🇷 🇮🇳</p>'+
+   '<p>Oslo\'s favourite restaurant for French and Indian cuisine. It is your first day at work. Can you help our guests in English?</p>'+
+   '<p class="sub">5 missions · about 20 minutes · play alone or in pairs, in any order. After every question, <b>say the best answer out loud</b>.</p>'+
+   '<label for="nm" class="sub">Your name (for your result)</label><br><input id="nm" autocomplete="off" placeholder="Type your name"><br>'+
+   '<button class="btn" id="go" type="button">Start my shift</button></section>';
+  $("#nm").oninput=function(){st.name=this.value.trim()};
+  $("#go").onclick=function(){st.name=$("#nm").value.trim();showHub()};
+}
+
+function showHub(){
+  go();
+  var t=totals(),done=0;MISSIONS.forEach(function(m,i){if(isDone(i))done++});
+  view.innerHTML='<section class="card"><h2>'+(st.name?esc(st.name)+", choose":"Choose")+' a mission</h2><p class="sub">Play the missions in any order. You can leave a mission and come back later. Your points are saved while this page is open.</p>'+
+   '<div class="progress" aria-hidden="true"><i style="width:'+Math.round(100*qDone()/QT)+'%"></i></div><div class="meta"><span>'+done+' of '+MISSIONS.length+' missions finished</span><span>⭐ '+t.p+' points</span></div>'+
+   '<div class="mlist" id="ml"></div><div class="nav" style="justify-content:center"><button class="btn alt" id="res" type="button">See my result</button></div></section>';
+  var box=$("#ml");
+  MISSIONS.forEach(function(m,mi){
+    var s=M[mi],n=m.scenes.length,fin=isDone(mi);
+    var status=fin?"✅ Finished · "+s.p+"/"+s.max+" points":s.idx>0?"In progress · "+s.idx+" of "+n+" answered":"Not started";
+    var b=document.createElement("button");b.type="button";b.className="mbtn";
+    b.innerHTML='<span class="e">'+m.emoji+'</span><span style="flex:1"><b>'+esc(m.title)+'</b><span class="sub">'+esc(m.intro)+'</span><span class="sub st">'+status+'</span></span><span class="go">'+(fin?"Replay":s.idx>0?"Continue":"Start")+'</span>';
+    b.onclick=function(){if(fin)M[mi]=blank();openMission(mi)};
+    box.appendChild(b);
+  });
+  $("#res").onclick=summary;
+}
+
+/* ---------- mission flow ---------- */
+function openMission(mi){
+  var s=M[mi],sc=MISSIONS[mi].scenes;
+  if(s.idx>=sc.length)return missionDone(mi);
+  if(s.idx===0&&!s.started){s.started=true;return intro(mi)}
+  playScene(mi);
+}
+function intro(mi){
+  go();var m=MISSIONS[mi];
+  view.innerHTML=topnav()+'<section class="card hero"><div class="big">'+m.emoji+'</div><div class="mission">'+esc(m.title)+'</div><p>'+esc(m.intro)+'</p><div class="nav" style="justify-content:center"><button class="btn" id="n" type="button">Let\'s go</button></div></section>';
+  wireBack();$("#n").onclick=function(){playScene(mi)};$("#n").focus();
+}
+function playScene(mi){
+  go();var sc=MISSIONS[mi].scenes[M[mi].idx];
+  if(sc.match)match(mi,sc);else choice(mi,sc);
+}
+
+function choice(mi,sc){
+  var s=M[mi],mt=MISSIONS[mi].title,n=MISSIONS[mi].scenes.length;
+  var opts=shuffle(sc.o.map(function(o){return{t:o[0],p:o[1],f:o[2],r:!!o[3]}}));
+  var best=opts.filter(function(o){return o.p===3})[0];
+  view.innerHTML=topnav()+bar(mi)+'<section class="card"><div class="mission">'+esc(mt)+'</div>'+
+   '<div class="bubble"><span class="av" aria-hidden="true">'+sc.e+'</span><div><div class="who">'+sc.who+' <button type="button" class="spk sm" data-say="'+ea(sc.say)+'" aria-label="Listen to the sentence" title="Listen">🔊</button></div><p class="say">'+esc(sc.say)+'</p><p class="no">🇳🇴 '+esc(sc.no||"")+'</p></div></div>'+
+   '<p class="prompt">'+esc(sc.q||"What do you say?")+'</p><div class="opts" id="opts"></div><div class="fb" id="fb" aria-live="polite"></div><div class="nav" id="nav"></div></section>';
+  wireBack();
+  var box=$("#opts");
+  opts.forEach(function(o,i){
+    var b=document.createElement("button");b.type="button";b.className="opt";
+    b.innerHTML='<span class="l">'+"ABCD"[i]+'</span><span>'+esc(o.t)+'</span>';
+    b.onclick=function(){
+      var btns=box.querySelectorAll(".opt");
+      btns.forEach(function(x,j){x.disabled=true;if(opts[j]===best)x.classList.add("best")});
+      b.classList.add("sel",o.p===3?"good":o.p>=1?"mid":"bad");
+      s.p+=o.p;s.max+=3;s.idx++;
+      if(o.r)s.risky.push({say:sc.say,best:best.t});
+      var fb=$("#fb");fb.className="fb show "+(o.p===3?"good":o.p===0?"bad":"");
+      fb.innerHTML='<span class="pts">+'+o.p+' point'+(o.p===1?"":"s")+'</span> · '+esc(o.f)+
+        (o.p<3?'<br><b>Best answer:</b> '+esc(best.t):'')+' <button type="button" class="spk sm" data-say="'+ea(best.t)+'" aria-label="Listen to the best answer" title="Listen to the best answer">🔊</button>'+
+        '<div class="say-aloud">🗣️ Now say the best answer out loud to your partner.</div>';
+      if(auto)speak(best.t);
+      var nb=document.createElement("button");nb.className="btn";nb.type="button";nb.textContent=s.idx>=n?"Finish mission":"Next";
+      nb.onclick=function(){openMission(mi)};$("#nav").appendChild(nb);nb.focus();
+    };
+    var row=document.createElement("div");row.className="optrow";row.appendChild(b);
+    var sp=document.createElement("button");sp.type="button";sp.className="spk";sp.setAttribute("aria-label","Listen to this answer");sp.title="Listen";sp.textContent="🔊";sp.dataset.say=o.t;row.appendChild(sp);
+    box.appendChild(row);
+  });
+  if(auto)speak(sc.say);
+}
+
+function match(mi,sc){
+  var s=M[mi],names=sc.match,left=shuffle(names),right=shuffle(names),sel=null,done=0,wrong={},pts=0,max=names.length*2,n=MISSIONS[mi].scenes.length;
+  view.innerHTML=topnav()+bar(mi)+'<section class="card"><div class="mission">'+esc(MISSIONS[mi].title)+'</div><h2>Match the dish to the description</h2><p class="sub">Tap a dish, then tap its description.</p><div class="match" id="m"></div><div class="fb" id="fb" aria-live="polite"></div><div class="nav" id="nav"></div></section>';
+  wireBack();
+  var m=$("#m");
+  var L=left.map(function(x){var b=document.createElement("button");b.type="button";b.className="pair";b.dataset.n=x;b.textContent=menu(x).c+" "+x;return b});
+  var R=right.map(function(x){var b=document.createElement("button");b.type="button";b.className="pair";b.dataset.n=x;b.textContent=menu(x).d.charAt(0).toUpperCase()+menu(x).d.slice(1);return b});
+  var cl=document.createElement("div"),cr=document.createElement("div");cl.style.display=cr.style.display="grid";cl.style.gap=cr.style.gap="10px";
+  L.forEach(function(b){cl.appendChild(b)});R.forEach(function(b){cr.appendChild(b)});m.appendChild(cl);m.appendChild(cr);
+  L.forEach(function(b){b.onclick=function(){if(b.classList.contains("done"))return;L.forEach(function(x){x.classList.remove("on")});b.classList.add("on");sel=b;if(auto)speak(b.dataset.n,menu(b.dataset.n).c==="🇫🇷"?"fr-FR":"en-IN")}});
+  R.forEach(function(b){b.onclick=function(){
+    if(b.classList.contains("done")||!sel)return;
+    if(sel.dataset.n===b.dataset.n){
+      pts+=wrong[b.dataset.n]?1:2;done++;if(auto)speak(menu(b.dataset.n).d);sel.classList.remove("on");sel.classList.add("done");b.classList.add("done");sel=null;
+      if(done===names.length){
+        s.p+=pts;s.max+=max;s.idx++;
+        var fb=$("#fb");fb.className="fb show good";fb.innerHTML='<span class="pts">+'+pts+' of '+max+' points</span> · Great! You know the menu. Now say each dish name and describe it in your own words.';
+        var nb=document.createElement("button");nb.className="btn";nb.type="button";nb.textContent=s.idx>=n?"Finish mission":"Next";nb.onclick=function(){openMission(mi)};$("#nav").appendChild(nb);nb.focus();
+      }
+    }else{
+      wrong[sel.dataset.n]=1;b.classList.add("shake");sel.classList.add("shake");
+      var a=sel;setTimeout(function(){b.classList.remove("shake");a.classList.remove("shake")},350);
+    }
+  }});
+}
+
+function riskBlock(list,intro){
+  return'<div class="safe warn"><b>⚠️ Safety check: '+list.length+' risky answer'+(list.length>1?"s":"")+'.</b> '+intro+'<ul>'+list.map(function(x){return'<li>Guest: “'+esc(x.say)+'”<br><b>Better:</b> '+esc(x.best)+'</li>'}).join("")+'</ul></div>';
+}
+function missionDone(mi){
+  go();var m=MISSIONS[mi],s=M[mi];
+  var hasRisk=m.scenes.some(function(x){return x.o&&x.o.some(function(o){return o[3]})});
+  var safe=!hasRisk?"":(s.risky.length?riskBlock(s.risky,"In a real restaurant these answers can hurt a guest. Study these:"):'<div class="safe"><b>✅ Safety check passed.</b> You never gave risky information in this mission.</div>');
+  var nextMi=mi+1<MISSIONS.length?mi+1:-1;
+  view.innerHTML=topnav()+'<section class="card hero"><div class="big">'+m.emoji+'</div><div class="mission">'+esc(m.title)+'</div><h2>Mission complete!</h2><p><b>'+s.p+' / '+s.max+' points</b></p><div style="text-align:left">'+safe+'</div>'+
+   '<div class="nav" style="justify-content:center"><button class="btn alt" id="rp" type="button">Replay this mission</button><button class="btn alt" id="hub" type="button">All missions</button><button class="btn" id="nx" type="button">'+(nextMi>=0?"Next mission ›":"See my result")+'</button></div></section>';
+  wireBack();
+  $("#rp").onclick=function(){M[mi]=blank();openMission(mi)};
+  $("#hub").onclick=showHub;
+  $("#nx").onclick=function(){if(nextMi>=0)openMission(nextMi);else summary()};
+}
+
+/* ---------- result ---------- */
+function rank(p){
+  if(p>=85)return["Maître d'","⭐⭐⭐","Excellent! You are ready to welcome guests from all over the world."];
+  if(p>=65)return["Chef de rang","⭐⭐","Very good! A few phrases to polish and you will be a star."];
+  if(p>=40)return["Commis (trainee)","⭐","Good start! Read the best answers again and try once more."];
+  return["First-day trainee","🌱","Everyone starts somewhere. Study the phrases below and play again."];
+}
+function summary(){
+  go();var t=totals(),pct=t.max?Math.round(100*t.p/t.max):0,r=rank(pct);
+  var finished=0;MISSIONS.forEach(function(m,i){if(isDone(i))finished++});
+  var per=MISSIONS.map(function(m,i){var p=M[i];var w=p.max?Math.round(100*p.p/p.max):0;
+    return'<div class="scorebar"><span class="name">'+esc(m.title.replace("Mission ","M"))+'</span><span class="bar"><i style="width:'+w+'%"></i></span><span>'+(p.idx?p.p+'/'+p.max:"–")+'</span></div>'}).join("");
+  var risky=[];M.forEach(function(s){risky=risky.concat(s.risky)});
+  var safe=risky.length?riskBlock(risky,"In a real restaurant these answers can hurt a guest. Study these:"):(finished?'<div class="safe"><b>✅ Safety check passed.</b> You never gave risky information about allergies or ingredients.</div>':'');
+  var note=finished<MISSIONS.length?'<p class="sub noprint">You have finished '+finished+' of '+MISSIONS.length+' missions. Go back and play the rest to improve your result.</p>':"";
+  var phr=MISSIONS.map(function(m){
+    var items=m.scenes.filter(function(s){return s.o}).map(function(s){var b=s.o.filter(function(o){return o[1]===3})[0];return'<li>'+esc(b[0])+' <button type="button" class="spk sm noprint" data-say="'+ea(b[0])+'" aria-label="Listen" title="Listen">🔊</button></li>'}).join("");
+    return items?'<h3>'+esc(m.title)+'</h3><ul>'+items+'</ul>':"";
+  }).join("");
+  view.innerHTML='<section class="card hero"><div class="big">🏅</div><h2>'+(st.name?esc(st.name)+", your":"Your")+' result</h2>'+
+   (t.max?'<div class="rank">'+r[0]+' '+r[1]+'</div><p><b>'+t.p+' / '+t.max+' points ('+pct+'%)</b></p><p>'+r[2]+'</p>':'<p>You have not answered any questions yet. Choose a mission to begin.</p>')+note+
+   '<div style="text-align:left">'+per+safe+'<div class="phr"><h2>Your phrasebank</h2><p class="sub">The best answers from this game. Practise them with a partner.</p>'+phr+'</div></div>'+
+   '<div class="nav" style="justify-content:center"><button class="btn alt" id="pr" type="button">Print or save as PDF</button><button class="btn alt" id="hub" type="button">All missions</button><button class="btn" id="again" type="button">Start again</button></div></section>';
+  $("#pr").onclick=function(){window.print()};
+  $("#hub").onclick=showHub;
+  $("#again").onclick=function(){fresh(st.name);showHub()};
+}
+
+/* ---------- menu dialog + toggles ---------- */
+function menuHtml(){
+  var rows=MENU.map(function(m){
+    var tags=(m.v?'<span class="tag v">vegetarian</span>':'')+m.x.map(function(x){return'<span class="tag al">'+esc(x)+'</span>'}).join("");
+    return'<tr><td>'+m.c+' <b>'+esc(m.n)+'</b> <button type="button" class="spk sm" data-say="'+ea(m.n)+'" data-lang="'+(m.c==="🇫🇷"?"fr-FR":"en-IN")+'" aria-label="Listen to the name" title="Listen to the name">🔊</button><br><span class="sub">'+m.cat+'</span></td><td>'+esc(m.d)+' <button type="button" class="spk sm" data-say="'+ea(m.d)+'" aria-label="Listen to the description" title="Listen to the description">🔊</button></td><td>'+(tags||'<span class="sub">–</span>')+'</td></tr>';
+  }).join("");
+  return'<p class="sub">Red tags show what a dish contains. This menu is fictional and made for this game.</p><table><thead><tr><th>Dish</th><th>Description</th><th>Contains</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+$("#dbody").innerHTML=menuHtml();
+var dlg=$("#dlg");
+$("#bMenu").onclick=function(){if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","")};
+$("#bMiss").onclick=function(){showHub()};
+$("#dx").onclick=function(){dlg.close?dlg.close():dlg.removeAttribute("open")};
+function toggle(id,cls,key){
+  var b=$(id);
+  function set(on){document.body.classList.toggle(cls,on);b.setAttribute("aria-pressed",String(on));try{localStorage.setItem(key,on?"1":"0")}catch(e){}}
+  var saved=false;try{saved=localStorage.getItem(key)==="1"}catch(e){}
+  set(saved);b.onclick=function(){set(!document.body.classList.contains(cls))};
+}
+toggle("#bHint","hint","mm_hint");
+
+/* ---------- accessibility settings ---------- */
+var SIZES=[1,1.25,1.5,1.75,2,2.5,3];
+var FONTS=[
+ {id:"std",name:"Standard",stack:'"Segoe UI",system-ui,-apple-system,Arial,sans-serif',h:'Georgia,serif'},
+ {id:"verdana",name:"Verdana",stack:'Verdana,Geneva,sans-serif'},
+ {id:"arial",name:"Arial",stack:'Arial,Helvetica,sans-serif'},
+ {id:"tahoma",name:"Tahoma",stack:'Tahoma,Geneva,sans-serif'},
+ {id:"trebuchet",name:"Trebuchet",stack:'"Trebuchet MS",Tahoma,sans-serif'},
+ {id:"georgia",name:"Georgia (serif)",stack:'Georgia,"Times New Roman",serif'},
+ {id:"comic",name:"Comic Sans",stack:'"Comic Sans MS","Comic Neue","Chalkboard SE",Verdana,sans-serif'},
+ {id:"dys",name:"Dyslexia-friendly",stack:'OpenDyslexic,"Atkinson Hyperlegible",Lexend,Verdana,sans-serif'}
+];
+var THEMES=[["std","Standard"],["hc","High contrast"],["dark","Dark"]];
+var DEF={size:1.25,font:"std",space:false,theme:"std"};
+var A=JSON.parse(JSON.stringify(DEF));
+try{var sv=JSON.parse(localStorage.getItem("mm_a11y")||"null");if(sv)for(var k in DEF)if(sv[k]!==undefined)A[k]=sv[k]}catch(e){}
+if(SIZES.indexOf(A.size)<0)A.size=DEF.size;
+var fontBox=$("#fonts"),themeBox=$("#themes");
+FONTS.forEach(function(f){var b=document.createElement("button");b.type="button";b.className="tg";b.dataset.f=f.id;b.textContent=f.name;b.style.fontFamily=f.stack;b.onclick=function(){A.font=f.id;applyA()};fontBox.appendChild(b)});
+THEMES.forEach(function(t){var b=document.createElement("button");b.type="button";b.className="tg";b.dataset.t=t[0];b.textContent=t[1];b.onclick=function(){A.theme=t[0];applyA()};themeBox.appendChild(b)});
+function narrow(){var rem=16*A.size*1.25;document.body.classList.toggle("narrow",window.innerWidth/(parseFloat(getComputedStyle(document.documentElement).fontSize)||20)<46)}
+function applyA(){
+  document.documentElement.style.fontSize=(16*A.size)+"px";
+  var f=FONTS.filter(function(x){return x.id===A.font})[0]||FONTS[0];
+  document.body.style.setProperty("--font",f.stack);document.body.style.setProperty("--hfont",f.h||f.stack);
+  document.body.classList.toggle("space",!!A.space);
+  document.body.classList.remove("hc","dark");if(A.theme==="hc")document.body.classList.add("hc");if(A.theme==="dark")document.body.classList.add("dark");
+  $("#sVal").textContent=Math.round(A.size*100)+"%";
+  $("#sMinus").disabled=SIZES.indexOf(A.size)<=0;$("#sPlus").disabled=SIZES.indexOf(A.size)>=SIZES.length-1;
+  $("#bSpace").setAttribute("aria-pressed",String(!!A.space));
+  [].forEach.call(fontBox.children,function(b){b.setAttribute("aria-pressed",String(b.dataset.f===A.font))});
+  [].forEach.call(themeBox.children,function(b){b.setAttribute("aria-pressed",String(b.dataset.t===A.theme))});
+  $("#fnote").textContent=A.font==="dys"?"Uses OpenDyslexic, Atkinson Hyperlegible or Lexend if they are installed on this computer, otherwise Verdana.":"";
+  try{localStorage.setItem("mm_a11y",JSON.stringify(A))}catch(e){}
+  narrow();
+}
+$("#sMinus").onclick=function(){var i=SIZES.indexOf(A.size);if(i>0){A.size=SIZES[i-1];applyA()}};
+$("#sPlus").onclick=function(){var i=SIZES.indexOf(A.size);if(i<SIZES.length-1){A.size=SIZES[i+1];applyA()}};
+$("#bSpace").onclick=function(){A.space=!A.space;applyA()};
+$("#aReset").onclick=function(){A=JSON.parse(JSON.stringify(DEF));applyA()};
+var dlgA=$("#dlgA");
+function closeA(){dlgA.close?dlgA.close():dlgA.removeAttribute("open")}
+$("#bA11y").onclick=function(){if(dlgA.showModal)dlgA.showModal();else dlgA.setAttribute("open","")};
+$("#dax").onclick=closeA;$("#aDone").onclick=closeA;
+window.addEventListener("resize",narrow);
+applyA();
+function flag(id,key,fn){
+  var b=$(id);
+  function set(on){fn(on);b.setAttribute("aria-pressed",String(on));try{localStorage.setItem(key,on?"1":"0")}catch(e){}}
+  var saved=false;try{saved=localStorage.getItem(key)==="1"}catch(e){}
+  set(saved);b.onclick=function(){var on=b.getAttribute("aria-pressed")!=="true";set(on);if(on&&id==="#bAuto")speak("Auto-read is on.")};
+}
+if(!synth){$("#hSound").style.display="none";$("#gSound").style.display="none"}
+else{
+  flag("#bAuto","mm_auto",function(on){auto=on;if(!on){try{synth.cancel()}catch(e){}}});
+  flag("#bSlow","mm_slow",function(on){slow=on});
+}
+showStart();
+})();
+</script>
+</body>
+</html>
